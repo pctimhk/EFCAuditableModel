@@ -38,7 +38,10 @@ namespace AuditableEFModel
                 if (entityEntry.State == EntityState.Added)
                 {
                     myEntity.CreatedAt = DateTime.UtcNow;
-                    myEntity.CreatedBy = this.httpContextAccessor?.HttpContext?.User?.Identity?.Name ?? "?";
+                    if (this.httpContextAccessor != null)
+                        myEntity.CreatedBy = this.httpContextAccessor?.HttpContext?.User?.Identity?.Name ?? "?";
+                    else
+                        myEntity.CreatedBy = Environment.UserName;
                 }
                 else
                 {
@@ -52,7 +55,11 @@ namespace AuditableEFModel
                 // In any case we always want to set the properties
                 // ModifiedAt and ModifiedBy
                 myEntity.ModifiedAt = DateTime.UtcNow;
-                myEntity.ModifiedBy = this.httpContextAccessor?.HttpContext?.User?.Identity?.Name ?? "?";
+                if (this.httpContextAccessor != null)
+                    myEntity.ModifiedBy = this.httpContextAccessor?.HttpContext?.User?.Identity?.Name ?? "?";
+                else
+                    myEntity.ModifiedBy = Environment.UserName;
+
                 changedEntries.Add(myEntity);
             }
 
