@@ -10,10 +10,10 @@ namespace AuditableEFModel
     public interface IAuditableModel
     {
 
-        DateTime CreatedDateTime { get; set; }
+        DateTime CreatedAt { get; set; }
         String CreatedBy { get; set; }
 
-        DateTime ModifiedDateTime { get; set; }
+        DateTime ModifiedAt { get; set; }
         String ModifiedBy { get; set; }
 
         String ModifiedChannel { get; set; }
